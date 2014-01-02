@@ -1,0 +1,19 @@
+<Application x:Class="MvvmDatabaseExample.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mvvmDatabaseExample="clr-namespace:MvvmDatabaseExample"
+             xmlns:viewModel="clr-namespace:MvvmDatabaseExample.ViewModel">
+    <!--Application Resources-->
+    <Application.Resources>
+        <mvvmDatabaseExample:LocalizedStrings x:Key="LocalizedStrings" />
+        <viewModel:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
+    </Application.Resources>
+    <Application.ApplicationLifetimeObjects>
+        <!--Required object that handles lifetime events for the application-->
+        <shell:PhoneApplicationService Launching="Application_Launching" Closing="Application_Closing" Activated="Application_Activated" Deactivated="Application_Deactivated" />
+    </Application.ApplicationLifetimeObjects>
+</Application>

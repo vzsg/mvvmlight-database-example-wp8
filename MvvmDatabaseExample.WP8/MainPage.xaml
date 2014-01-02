@@ -1,0 +1,62 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="MvvmDatabaseExample.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    mc:Ignorable="d"
+    DataContext="{Binding QueryPage, Source={StaticResource Locator}}"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+    <Grid Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.ApplicationTitle}" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.QueryPageTitle}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <toolkit:ListPicker Grid.Row="1" Margin="24,0,24,24"
+                            Header="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.ShowStations}"
+                            ItemsSource="{Binding Stations}" SelectedIndex="{Binding SelectedStationIndex, Mode=TwoWay}">
+            <toolkit:ListPicker.FullModeItemTemplate>
+                <DataTemplate>
+                    <TextBlock Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding}" Margin="0,0,0,12"/>
+                </DataTemplate>
+            </toolkit:ListPicker.FullModeItemTemplate>
+        </toolkit:ListPicker>
+
+        <ListBox ItemsSource="{Binding Items}" HorizontalContentAlignment="Stretch" Grid.Row="2" Margin="12,0,12,0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Width="432" Orientation="Vertical" Margin="0,0,0,6">
+                        <TextBlock Style="{StaticResource PhoneTextLargeStyle}">
+                                <Run Text="{Binding FromStop}"/>
+                                <Run Text="-"/>
+                                <Run Text="{Binding ToStop}"/>
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource PhoneTextTitle3Style}">
+                                <Run Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.DepartsAt}"/>
+                                <Run Text="{Binding StartTime, StringFormat=t}"/>
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource PhoneTextTitle3Style}">
+                                <Run Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.ArrivesAt}"/>
+                                <Run Text="{Binding EndTime, StringFormat=t}"/>
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</phone:PhoneApplicationPage>
